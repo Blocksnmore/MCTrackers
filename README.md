@@ -2,7 +2,8 @@
  A Community remake of the trackers dream uses
 
 # SUPPORT WILL NOT BE PROVIDED FOR FORKS OF THIS!
-* Support [<img src="https://discordapp.com/api/guilds/556651899600896011/widget.png">](https://discord.gg/sedr8Jf)
+* Support <br>
+[<img src="https://discordapp.com/api/guilds/556651899600896011/widget.png">](https://discord.gg/sedr8Jf)
 
 ## Commands
 | Command usage | Description |
