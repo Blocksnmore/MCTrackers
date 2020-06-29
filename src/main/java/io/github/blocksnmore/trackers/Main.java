@@ -17,86 +17,121 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Main extends JavaPlugin implements Listener{
-	FileConfiguration config = getConfig();
-	HashMap<CommandSender, Player> track = new HashMap<CommandSender, Player>();
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-	if (config.getBoolean("permission-req") && sender.hasPermission("trackers.track") || !config.getBoolean("permission-req")) {
-	if (args.length == 0){
-		sender.sendMessage(ChatColor.GREEN+"Trackers by Blocks_n_more#5526 \n"+ChatColor.GREEN+"/trackers track <player> or /trackers clear");
-	}else if (args[0].equalsIgnoreCase("track")) {
-	if (args.length == 1) {
-		sender.sendMessage(ChatColor.RED+"You need to add a player!");
+public class Main extends JavaPlugin implements Listener{ //Start of main class
+	FileConfiguration config = getConfig(); // Config file so i don't have to fetch it every request
+	
+	HashMap<CommandSender, Player> track = new HashMap<CommandSender, Player>(); // The tracker storage
+	
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) { // Command
+		
+	if (config.getBoolean("permission-req") && // Check if permission requirement is on in the config
+	sender.hasPermission("trackers.track") || // Check if player has permission
+	!config.getBoolean("permission-req")) { // Or check if config has permissions disabled
+		
+	if (args.length == 0){ // Check for no arguments
+		sender.sendMessage(ChatColor.GREEN+"Trackers by Blocks_n_more#5526 \n"+ChatColor.GREEN+"/trackers track <player> or /trackers clear"); // No args message
+		
+	}else if (args[0].equalsIgnoreCase("track")) { // track argument
+		
+	if (args.length == 1) { // Check if there is no player provided
+		sender.sendMessage(ChatColor.RED+"You need to add a player!"); // No player message
 	}else {
-		if(Bukkit.getServer().getPlayer(args[1]) != null) {
-			sender.sendMessage(ChatColor.GREEN+"You are now tracking "+args[1]);
-			if(((Player)sender).getInventory().contains(Material.COMPASS)) {
-				sender.sendMessage(ChatColor.GREEN+"You did not have a compass so you were given one!");
-				((Player)sender).getInventory().addItem(new ItemStack(Material.COMPASS));
-			}
-			Player p = Bukkit.getServer().getPlayer(args[1]);
-			((Player) sender).setCompassTarget(p.getLocation());
+		if(Bukkit.getServer().getPlayer(args[1]) != null) { // Check if the player is online
 			
-			Player playe = Bukkit.getServer().getPlayer(sender.getName());
-			track.put(playe, p);
+			sender.sendMessage(ChatColor.GREEN+"You are now tracking "+args[1]); // Tracking message
+			if(!((Player)sender).getInventory().contains(Material.COMPASS) || !config.getBoolean("give-compass")) { // Check if player doesn't have a compass and give-compass is enabled
+				
+				sender.sendMessage(ChatColor.GREEN+"You did not have a compass so you were given one!"); // Give compass message
+				((Player)sender).getInventory().addItem(new ItemStack(Material.COMPASS)); // Gives compass
+			}
+			Player p = Bukkit.getServer().getPlayer(args[1]); // Get player your tracking
+			((Player) sender).setCompassTarget(p.getLocation()); // Set Location of compass
+			
+			Player playe = Bukkit.getServer().getPlayer(sender.getName()); // Get the player
+			track.put(playe, p); // Store the player for updating
 		}else {
-			sender.sendMessage(ChatColor.RED+"Player is not online!");
+			sender.sendMessage(ChatColor.RED+"Player is not online!"); // message if player isn't on
 		}
-
 	}
-	}else if (args[0].equalsIgnoreCase("clear")){
-		if(track.containsKey(sender)) {
-			sender.sendMessage(ChatColor.GREEN+"You are no longer tracking anyone");
-			track.remove(sender);
+	
+	}else if (args[0].equalsIgnoreCase("clear")){ // clear argument
+		if(track.containsKey(sender)) { // Check if they are tracking someone
+			sender.sendMessage(ChatColor.GREEN+"You are no longer tracking anyone"); // Stop tracking message
+			track.remove(sender); // Remove player
 		}else {
-			sender.sendMessage(ChatColor.RED+"You're not tracking anyone!");
+			sender.sendMessage(ChatColor.RED+"You're not tracking anyone!"); // Not tracking message
 		}
 	}else {
-		sender.sendMessage(ChatColor.RED+"I don't know that one");
+		sender.sendMessage(ChatColor.RED+"I don't know that one"); // Unknown Argument
 	}
 	}else {
-		sender.sendMessage(ChatColor.GREEN+"Trackers by Blocks_n_more#5526 \n"+ChatColor.RED+"You do not have any sub command permissions");
+		sender.sendMessage(ChatColor.GREEN+"Trackers by Blocks_n_more#5526 \n"+ChatColor.RED+"You do not have any sub command permissions"); // Missing Permissions message
 	}
 	return false;
 	}
 	
 	@Override
-	public void onEnable() {
-		System.out.println(ChatColor.GREEN+"[Trackers] > A Public remake of of Dreams trackers created by Blocks_n_more#5526");
-		System.out.println(ChatColor.GREEN+"[Trackers] > Registering Listeners");
-		PluginManager manager = getServer().getPluginManager();
-    	manager.registerEvents(this /* class of listener. this if it's your main class */, this/* your main class */);
-    	System.out.println(ChatColor.GREEN+"[Trackers] > Registered Listeners");
-    	System.out.println(ChatColor.GREEN+"[Trackers] > Loading config");
-    	config.addDefault("permission-req", true);
-    	config.addDefault("new-tracker", true);
-        config.options().copyDefaults(true);
-        saveDefaultConfig();
-        System.out.println(ChatColor.GREEN+"[Trackers] > Loaded config");
-        System.out.println(ChatColor.GREEN+"[Trackers] > Plugin is now enabled!");
+	public void onEnable() { // Plugin enable
+		
+		System.out.println(ChatColor.GREEN+"[Trackers] > A Public remake of of Dreams trackers created by Blocks_n_more#5526"); // Loading messages
+		System.out.println(ChatColor.GREEN+"[Trackers] > Registering Listeners"); // Register Listener message
+		PluginManager manager = getServer().getPluginManager(); // Get Plugin manager
+    	manager.registerEvents(this /* class of listener. this if it's your main class */, this/* your main class */); // Register Listener
+    	
+    	
+    	System.out.println(ChatColor.GREEN+"[Trackers] > Registered Listeners"); // Register Listener message
+    	System.out.println(ChatColor.GREEN+"[Trackers] > Loading config"); // Load Config
+    	config.addDefault("permission-req", true); // Register 1st config option
+    	config.addDefault("new-tracker", true); // Register 2nd config option
+    	config.addDefault("give-compass", true); // Register 3rd config option
+        config.options().copyDefaults(true); // Initialize Config
+        saveDefaultConfig(); // Save config
+        
+        System.out.println(ChatColor.GREEN+"[Trackers] > Loaded config"); // Loaded config message
+        
+        System.out.println(ChatColor.GREEN+"[Trackers] > Plugin is now enabled!"); // Plugin enabled message
 	}
 	@Override
 	public void onDisable() {
-		System.out.println(ChatColor.GREEN+"[Trackers] > Plugin is now disabled");
+		System.out.println(ChatColor.GREEN+"[Trackers] > Plugin is now disabled"); // Plugin disable message
 	}
+	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void onMove(PlayerInteractEvent e) {
-		if(track.containsKey(e.getPlayer())) {
-		if(e.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.COMPASS)) {	
-		Player player2name = track.get(e.getPlayer());
+	public void onMove(PlayerInteractEvent e) { // Right Click event
+		if(track.containsKey(e.getPlayer())) { // Check if player has a tracker
+		Player user = e.getPlayer();
+		Player player2name = track.get(e.getPlayer()); // Get player
+		if(!Bukkit.getBukkitVersion().contains("1.8")) { // Check if version is "legacy"
+		if(e.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.COMPASS)) { // Check if the item they are holding is a compass 1.9+
+		
 		if(player2name.getWorld() == e.getPlayer().getWorld()) {
-		e.getPlayer().setCompassTarget(player2name.getLocation());
-		e.getPlayer().sendMessage(ChatColor.GREEN+"You are tracking "+player2name.getName());
+		user.setCompassTarget(player2name.getLocation()); // Set compass location
+		user.sendMessage(ChatColor.GREEN+"You are tracking "+player2name.getName()); // Tracking message
+		}else { // If the player is not in the same world
+			user.sendMessage(ChatColor.RED+"No player to track! They might be in a diffrent world"); // Player not in same world message
 		}
 		}
+		}else {
+			if(e.getPlayer().getInventory().getItemInHand().getType().equals(Material.COMPASS)) { // Check if the item they are holding is a compass 1.8
+				
+				if(player2name.getWorld() == e.getPlayer().getWorld()) {
+				user.setCompassTarget(player2name.getLocation()); // Set compass location
+				user.sendMessage(ChatColor.GREEN+"You are tracking "+player2name.getName()); // Tracking message
+				}else { // If the player is not in the same world
+					user.sendMessage(ChatColor.RED+"No player to track! They might be in a diffrent world"); // Player not in same world message
+				}
+				}	
+			
+		}
+		
 		}	
 	}
 	@EventHandler
-	public void onDeath(PlayerRespawnEvent d){	
-			if(config.getBoolean("new-tracker")) {
-			Player p = d.getPlayer();
-			if(track.containsKey(p)) {
-			p.getInventory().addItem(new ItemStack(Material.COMPASS));
+	public void onDeath(PlayerRespawnEvent d){	// When a player respawns
+			if(config.getBoolean("new-tracker")) { // If the option is enabled in the config
+			Player p = d.getPlayer(); // Get player
+			if(track.containsKey(p)) { // Check if player is using a tracker
+			p.getInventory().addItem(new ItemStack(Material.COMPASS)); // Give compass
 			}
 		}
 	}

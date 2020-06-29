@@ -18,7 +18,11 @@ permission-req: true
 # If a player should get a new compass when they die
 new-tracker: true
 
+# If a player should be given a compass when they run the command and dont have one in their inventory
+give-compass: true
+
 
 # Defaults
 # permission-req: true 
 # new-tracker: true
+# give-compass: true
