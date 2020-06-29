@@ -1,0 +1,25 @@
+#  _____                  _                     
+# (_   _)                ( )                    
+#   | |  _ __   _ _   ___| |/ )   __  _ __  ___ 
+#   | | (  __)/ _  )/ ___)   (  / __ \  __)  __)
+#   | | | |  ( (_| | (___| |\ \(  ___/ |  \__  \
+#   (_) (_)   \__ _)\____)_) (_)\____)_)  (____/
+                                              
+                                              
+
+
+# A plugin developed by Blocks_n_more#5526
+
+# Currently there is 1 permission node, 'trackers.track' which is used for the base command
+
+# If a permission node ('trackers.track') is required to use the base command
+permission-req: true 
+
+# If a player should get a new compass when they die
+new-tracker: true
+
+
+# Defaults
+# permission-req: true 
+# new-tracker: true
+

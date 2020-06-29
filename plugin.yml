@@ -1,0 +1,9 @@
+name: Trackers
+main: io.github.blocksnmore.trackers.Main
+version: 1.0.0
+author: Blocks_n_more#5526 on discord
+commands:
+   trackers:
+      description: A Community remake of Dreams trackers
+      
+
