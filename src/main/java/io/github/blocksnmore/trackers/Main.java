@@ -90,6 +90,12 @@ public class Main extends JavaPlugin implements Listener{ //Start of main class
         System.out.println(ChatColor.GREEN+"[Trackers] > Loaded config"); // Loaded config message
         
         System.out.println(ChatColor.GREEN+"[Trackers] > Plugin is now enabled!"); // Plugin enabled message
+        if(Bukkit.getBukkitVersion().contains("1.8")) {
+        System.out.println(ChatColor.GREEN+"[Trackers] > \"Legacy\" Version detected. Be aware there may be slight issues, if you find an issue report it here https://github.com/Blocksnmore/Dream-Trackers-Remake/issues "+
+        		ChatColor.GREEN+"\n1.8 issues will likely not be fixed unless it's a critical bug");
+        }else {
+        	System.out.println(ChatColor.GREEN+"[Trackers] > 1.9+ detected, Most features should work without issues, if you find an issue report it here https://github.com/Blocksnmore/Dream-Trackers-Remake/issues");
+        }
 	}
 	@Override
 	public void onDisable() {
