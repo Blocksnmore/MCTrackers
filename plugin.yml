@@ -6,4 +6,8 @@ commands:
    trackers:
       description: A Community remake of Dreams trackers
       
+permissions:
+  trackers.track:
+    description: The base permission to use the command
+    default: op
 
