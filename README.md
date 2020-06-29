@@ -9,7 +9,7 @@
 | Command usage | Description |
 | --- | --- |
 | /trackers | Base Command |
-| /trackers track <player> | Makes/Gives a compass that tracks the player |
+| /trackers track (player) | Makes/Gives a compass that tracks the player |
 | /trackers clear | Disables your tracker |
  
  
