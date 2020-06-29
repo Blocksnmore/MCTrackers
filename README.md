@@ -14,3 +14,17 @@
  
  
 ``` This is open source! You may create forks but credit is requested, visit the discord to ask questions relating to modifying source ```
+
+`Untested versions will be updated as they are tested and working`
+
+## Tested & Confirmed working versions
+* 1.16
+* 1.15
+* 1.14
+* 1.8
+
+## Untested but Should work
+* 1.13
+* 1.12
+* 1.10
+* 1.9
