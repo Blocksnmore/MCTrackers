@@ -77,7 +77,7 @@ public class Main extends JavaPlugin implements Listener{ //Start of main class
 		System.out.println(ChatColor.GREEN+"[Trackers] > Registering Listeners"); // Register Listener message
 		PluginManager manager = getServer().getPluginManager(); // Get Plugin manager
     	manager.registerEvents(this /* class of listener. this if it's your main class */, this/* your main class */); // Register Listener
-    	
+    
     	
     	System.out.println(ChatColor.GREEN+"[Trackers] > Registered Listeners"); // Register Listener message
     	System.out.println(ChatColor.GREEN+"[Trackers] > Loading config"); // Load Config
@@ -102,6 +102,8 @@ public class Main extends JavaPlugin implements Listener{ //Start of main class
         	System.out.println(ChatColor.GREEN+"[Trackers] > 1.9+ detected, Most features should work without issues, if you find an issue report it here https://github.com/Blocksnmore/Dream-Trackers-Remake/issues");
         }
 	}
+
+
 	@Override
 	public void onDisable() {
 		System.out.println(ChatColor.GREEN+"[Trackers] > Thanks for using this plugin!");
