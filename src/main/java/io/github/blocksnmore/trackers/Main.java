@@ -90,7 +90,12 @@ public class Main extends JavaPlugin implements Listener{ //Start of main class
         System.out.println(ChatColor.GREEN+"[Trackers] > Loaded config"); // Loaded config message
         
         System.out.println(ChatColor.GREEN+"[Trackers] > Plugin is now enabled!"); // Plugin enabled message
-        if(Bukkit.getBukkitVersion().contains("1.8")) {
+        String ver;
+		ver = checkVer();
+		
+        if(ver.equalsIgnoreCase("el")) {
+        	System.out.println(ChatColor.RED+"[Trackers] > \"Extreme Legacy\" Version detected. This version is use-at-your-own-risk, Any bugs will not be fixed for these versions");
+        }else if(ver.equalsIgnoreCase("l")) {
         System.out.println(ChatColor.GREEN+"[Trackers] > \"Legacy\" Version detected. Be aware there may be slight issues, if you find an issue report it here https://github.com/Blocksnmore/Dream-Trackers-Remake/issues "+
         		ChatColor.GREEN+"\n1.8 issues will likely not be fixed unless it's a critical bug");
         }else {
@@ -99,15 +104,18 @@ public class Main extends JavaPlugin implements Listener{ //Start of main class
 	}
 	@Override
 	public void onDisable() {
-		System.out.println(ChatColor.GREEN+"[Trackers] > Plugin is now disabled"); // Plugin disable message
+		System.out.println(ChatColor.GREEN+"[Trackers] > Thanks for using this plugin!");
+		System.out.println(ChatColor.GREEN+"[Trackers] > The plugin is now disabled"); // Plugin disable message
 	}
 	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void onMove(PlayerInteractEvent e) { // Right Click event
+	public void onClick(PlayerInteractEvent e) { // Right Click event
 		if(track.containsKey(e.getPlayer())) { // Check if player has a tracker
 		Player user = e.getPlayer();
 		Player player2name = track.get(e.getPlayer()); // Get player
-		if(!Bukkit.getBukkitVersion().contains("1.8")) { // Check if version is "legacy"
+		String ver;
+		ver = checkVer();
+		if(ver.equalsIgnoreCase("r")) { // Check if version is "legacy"
 		if(e.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.COMPASS)) { // Check if the item they are holding is a compass 1.9+
 		
 		if(player2name.getWorld() == e.getPlayer().getWorld()) {
@@ -140,5 +148,15 @@ public class Main extends JavaPlugin implements Listener{ //Start of main class
 			p.getInventory().addItem(new ItemStack(Material.COMPASS)); // Give compass
 			}
 		}
+	}
+	
+	public String checkVer() {
+		if(Bukkit.getBukkitVersion().contains("1.7") || Bukkit.getBukkitVersion().contains("1.6") || Bukkit.getBukkitVersion().contains("1.5") || Bukkit.getBukkitVersion().contains("1.4") || Bukkit.getBukkitVersion().contains("1.3") || Bukkit.getBukkitVersion().contains("1.2") || Bukkit.getBukkitVersion().contains("1.1") && !Bukkit.getBukkitVersion().contains("1.11")) {
+        	return "el";
+        }else if(Bukkit.getBukkitVersion().contains("1.8")) {
+        	return "l";
+        }else {
+        	return "r";
+        }
 	}
 }
