@@ -153,7 +153,13 @@ public class Main extends JavaPlugin implements Listener{ //Start of main class
 	}
 	
 	public String checkVer() {
-		if(Bukkit.getBukkitVersion().contains("1.7") || Bukkit.getBukkitVersion().contains("1.6") || Bukkit.getBukkitVersion().contains("1.5") || Bukkit.getBukkitVersion().contains("1.4") || Bukkit.getBukkitVersion().contains("1.3") || Bukkit.getBukkitVersion().contains("1.2") || Bukkit.getBukkitVersion().contains("1.1") && !Bukkit.getBukkitVersion().contains("1.11")) {
+		if(Bukkit.getBukkitVersion().contains("1.7") || 
+			Bukkit.getBukkitVersion().contains("1.6") || 
+			Bukkit.getBukkitVersion().contains("1.5") || 
+			Bukkit.getBukkitVersion().contains("1.4") || 
+			Bukkit.getBukkitVersion().contains("1.3") || 
+			Bukkit.getBukkitVersion().contains("1.2") || 
+			Bukkit.getBukkitVersion().contains("1.1") && !Bukkit.getBukkitVersion().contains("1.11")) { // Check if version is recent, legacy or extreme legacy
         	return "el";
         }else if(Bukkit.getBukkitVersion().contains("1.8")) {
         	return "l";
