@@ -30,6 +30,6 @@
 * 1.9
 
 # Download sites
-* https://www.spigotmc.org/resources/dream-tracker-remake.80827/ - SpigotMC
+* https://www.spigotmc.org/resources/80827/ - SpigotMC
 * https://minemen.com/resources/437/ - Minemen (Currently being verified)
 
