@@ -31,5 +31,4 @@
 
 # Download sites
 * https://www.spigotmc.org/resources/80827/ - SpigotMC
-* https://minemen.com/resources/437/ - Minemen
-
+Minemen has been removed due to low downloads and me just not prefering it
