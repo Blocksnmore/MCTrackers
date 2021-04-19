@@ -2,8 +2,7 @@
  A Community remake of the trackers dream uses
 
 # SUPPORT WILL NOT BE PROVIDED FOR FORKS OF THIS!
-* Support <br>
-[<img src="https://discordapp.com/api/guilds/556651899600896011/widget.png">](https://discord.gg/sedr8Jf)
+* Support: Issues tab on gh
 
 ## Commands
 | Command usage | Description |
@@ -30,5 +29,5 @@
 * 1.9
 
 # Download sites
-* https://www.spigotmc.org/resources/80827/ - SpigotMC
+* https://www.spigotmc.org/resources/80827/ - SpigotMC<br>
 Minemen has been removed due to low downloads and me just not prefering it
